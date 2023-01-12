@@ -36,6 +36,13 @@ export function buildNextAuthOptions(req: NextApiRequest, res: NextApiResponse):
 
                 return true;
             },
+
+            async session({ session, user }) {
+                return {
+                    ...session,
+                    user,
+                };
+            },
         },
     };
 }
