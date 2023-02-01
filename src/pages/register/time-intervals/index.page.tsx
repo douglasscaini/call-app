@@ -1,4 +1,5 @@
 import { Button, Checkbox, Heading, MultiStep, Text, TextInput } from "@ignite-ui/react";
+import { useRouter } from "next/router";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { ArrowRight } from "phosphor-react";
 import { z } from "zod";
@@ -77,6 +78,8 @@ export default function TimeIntervals() {
         },
     });
 
+    const router = useRouter();
+
     const weekDays = getWeekDays();
 
     const { fields } = useFieldArray({
@@ -90,6 +93,8 @@ export default function TimeIntervals() {
         const { intervals } = data as timeIntervalsFormOutput;
 
         await api.post("/users/time-intervals", { intervals });
+
+        await router.push("/register/update-profile");
     }
 
     return (
