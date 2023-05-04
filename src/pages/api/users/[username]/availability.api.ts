@@ -48,7 +48,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     const endHour = time_end_in_minutes / 60;
 
     const possibleTimes = Array.from({ length: endHour - startHour }).map((_, i) => {
-        return startHour + 1;
+        return startHour + i;
     });
 
     const blockedTimes = await prisma.scheduling.findMany({
