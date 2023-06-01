@@ -8,6 +8,7 @@ import { GetServerSideProps } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { buildNextAuthOptions } from "../../api/auth/[...nextauth].api";
 import { api } from "../../../lib/axios";
+import { NextSeo } from "next-seo";
 import { Container, Header } from "../styles";
 import { FormAnnotation, ProfileBox } from "./styles";
 
@@ -40,38 +41,42 @@ export default function UpdateProfile() {
     }
 
     return (
-        <Container>
-            <Header>
-                <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
-                <Text>
-                    Precisamos de algumas informações para criar seu perfil! Ah, você pode editar
-                    essas informações depois.
-                </Text>
+        <>
+            <NextSeo title="Atualize seu perfil | Ignite Call" noindex />
 
-                <MultiStep size={4} currentStep={4} />
-            </Header>
+            <Container>
+                <Header>
+                    <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
+                    <Text>
+                        Precisamos de algumas informações para criar seu perfil! Ah, você pode
+                        editar essas informações depois.
+                    </Text>
 
-            <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
-                <label>
-                    <Text size="sm">Foto de perfil</Text>
+                    <MultiStep size={4} currentStep={4} />
+                </Header>
 
-                    <Avatar src={session.data?.user.avatar_url} alt={session.data?.user.name} />
-                </label>
+                <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
+                    <label>
+                        <Text size="sm">Foto de perfil</Text>
 
-                <label>
-                    <Text size="sm">Sobre você</Text>
-                    <TextArea {...register("bio")} />
-                    <FormAnnotation>
-                        Fale um pouco sobre você. Isto será exibido em sua página pessoal.
-                    </FormAnnotation>
-                </label>
+                        <Avatar src={session.data?.user.avatar_url} alt={session.data?.user.name} />
+                    </label>
 
-                <Button type="submit" disabled={isSubmitting}>
-                    Finalizar
-                    <ArrowRight />
-                </Button>
-            </ProfileBox>
-        </Container>
+                    <label>
+                        <Text size="sm">Sobre você</Text>
+                        <TextArea {...register("bio")} />
+                        <FormAnnotation>
+                            Fale um pouco sobre você. Isto será exibido em sua página pessoal.
+                        </FormAnnotation>
+                    </label>
+
+                    <Button type="submit" disabled={isSubmitting}>
+                        Finalizar
+                        <ArrowRight />
+                    </Button>
+                </ProfileBox>
+            </Container>
+        </>
     );
 }
 
