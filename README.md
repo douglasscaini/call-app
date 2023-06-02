@@ -32,7 +32,7 @@
 $ npm install
 
 # Configurar variáveis de ambiente
-$ .env.example -> .env
+$ .env.example > .env
 
 # Iniciar o projeto:
 $ npm run dev
